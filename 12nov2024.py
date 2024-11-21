@@ -54,12 +54,12 @@ percents = [i/100 for i in percents]
 
 counts = [0 for i in range(len(percents))]
 
-for n in range(1000):
+for n in range(50000):
     wins = 0
     for i in range(len(percents)):
         if random.random() >= percents[i]:
             wins += 1
     counts[wins-1] += 1    
 
-print("2.1: Distribution of wins: " + str([i/1000 for i in counts]))
-print("2.2: Chance team makes cutoff: " + str(sum(counts[2:])/1000))
+print("2.1: Distribution of wins: " + str([i/50000 for i in counts]))
+print("2.2: Chance team makes cutoff: " + str(sum(counts[2:])/50000))
