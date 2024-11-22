@@ -1,20 +1,13 @@
 import random
+import util as u
 
 #Part 1
-
-counts = [0,0] #c[0] reps tails, c[1] reps heads
-
-for i in range(1000):
-    counts[random.randint(0,1)] += 1
-
-print("1.1: Chance of heads: " + str([i/1000 for i in counts][1]))
-
-counts = [0,0,0]
+print("1.1: Chance of heads: " + u.edist(2, 1000, true))
 
 for i in range(1000):
     counts[random.randint(0,1)+random.randint(0,1)] += 1
 
-print("1.2: Distribution: " + str([i/1000 for i in counts])) # one tail one head most likely b/c there are two ways to get the outcome (HT or TH)
+print("1.2: Distribution: " + cdist(0,0,0)) # one tail one head most likely b/c there are two ways to get the outcome (HT or TH)
 
 counts = [0 for i in range(6)]
 
