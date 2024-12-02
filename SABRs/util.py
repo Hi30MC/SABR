@@ -11,13 +11,16 @@ def edist(n: int, ct: int, normalize: bool) -> list[float]:
         out[randint(0, n+1)] += 1
     return mornlist(out, ct, normalize)
 
+def gencflip(ph: float):
+    return int(rd() >= ph)
+
 # Generate random number according to custom distribution
 def gencnum(pdist: list[float]):
     r = rd()
     cumprob = [sum(pdist[1][:i+1]) for i in range(len(pdist[1]))]
     print(cumprob)
     for i, p in enumerate(zip([0] + cumprob, cumprob + [1])):
-        if (p[0]<=r) and (r<p[1]):
+        if (p[0]<=r) and (r<p[1]): 
             return i
 
 # Monte Carlo generate a custom distribution
@@ -45,7 +48,6 @@ def repncdist(pdist: list[list[int], list[float]], reps: int, ct: int, normalize
         total = 0
         for _ in range(reps):
             total += gencnum(pdist)
-        out
     return 0 # TO-DO: finish
 
 def getnumfromprompt(prompt: str) -> int:
