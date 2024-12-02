@@ -9,7 +9,7 @@ def edist(n: int, ct: int, normalize: bool) -> list[float]:
     out = [0 for _ in range(n+1)]
     for _ in range(ct): 
         out[randint(0, n+1)] += 1
-    return mornlist(out, ct, normalize)
+    return normlist(out, ct, normalize)
 
 def gencflip(ph: float):
     return int(rd() >= ph)
