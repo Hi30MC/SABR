@@ -58,11 +58,11 @@ def edist(zeroindex: bool, n: int, ct: int, normalize: bool, enum: bool) -> list
     return [*zip([*range(zeroindex, n+zeroindex)], out)] if enum else out
 
 # Monte Carlo generate a custom distribution (eg. weighted dice)
-def cdist(pdist: list[list[int], list[float]], ct: int, normalize: bool, enumerate: bool) -> list[float]:
+def cdist(pdist: list[list[int], list[float]], ct: int, normalize: bool, enum: bool) -> list[float]:
     out = [0 for _ in range(len(pdist[0]) + 1)]
     for _ in range(ct):
         out[gencnum(pdist)] += 1
-    return normlist(out, ct, normalize) if not enumerate else [*zip(pdist[0], normlist(out, ct, normalize))]
+    return normlist(out, ct, normalize) if not enum else [*zip(pdist[0], normlist(out, ct, normalize))]
 
 # Monte Carlo generate a repeated uniform distribution (eg. n fair dice)
 def repnedist(zeroindex: bool, n: int, reps: int, ct: int, normalize: bool, enum: bool) -> list[float]:
@@ -81,7 +81,7 @@ def repnedist(zeroindex: bool, n: int, reps: int, ct: int, normalize: bool, enum
 # Monte Calro generate a repeated custom distribution (eg. n weighted dice)
 def repncdist(pdist: list[list[int], list[float]], reps: int, ct: int, normalize: bool, enum: bool) -> list[float]:
     tdist = genposspdist(pdist, reps)
-    return cdist(tdist, ct, normalize, enumerate)
+    return cdist(tdist, ct, normalize, enum)
 
 def getnumfromprompt(prompt: str) -> int:
     while True:
