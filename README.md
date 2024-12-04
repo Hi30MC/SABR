@@ -13,7 +13,7 @@ A repo for my 2024-25 SABRMetrics Class, in which we do baseball and other sport
 
 ## Unit Testing
 
-When first cloning this repo, run `./hooks/precommit.sh` whilst in the repository's root directory to create the auto-run hook
+When first cloning this repo, run `chmod u+x /hooks/pre-commit.sh` then `./hooks/precommit.sh` whilst in the repository's root directory to create the auto-run hook
 
 ---
 
