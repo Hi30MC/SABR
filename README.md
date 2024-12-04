@@ -7,7 +7,7 @@ SPDX-License-Identifier: CC0-1.0
 Hi30MC
 ---
 
-A repo for my 2024-25 SABRMetrics Class, in which we do baseball and other sport-related statistical analysis.
+A repo for our 2024-25 SABRMetrics Class, in which we do baseball and other sport-related statistical analysis.
 
 ---
 
