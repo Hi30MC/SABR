@@ -1,5 +1,6 @@
 import pandas as pd
-import sklearn as sk
+from sklearn import linear_model
+from sklearn.metrics import mean_squared_error, r2_score
 
 """
 1. For last season (2024) for the entire league (all 30 teams – ie, 30 rows of
@@ -14,3 +15,8 @@ between the actual values in 2021 and your estimated values for each team.
 Take the average of those absolute value differences to determine the Mean
 Absolute Error.
 """
+
+#1.1 - Model Creation
+
+statcast_hitting = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting")
+print(statcast_hitting)
