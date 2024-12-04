@@ -35,7 +35,7 @@ def genpossouts(pdist: list[list[int], list[float]], reps: int) -> list[int]:
             for j in out:
                 t.add(i+j)
         out = t
-    return out
+    return [*out]
 
 # Generate probabilty distribution of n consecutive repetitions of a given distribution
 def genposspdist(pdist: list[list[int], list[float]], reps:int) -> list[list[int], list[float]]:
