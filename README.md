@@ -9,6 +9,14 @@ Hi30MC
 
 A repo for my 2024-25 SABRMetrics Class, in which we do baseball and other sport-related statistical analysis.
 
+---
+
+## Unit Testing
+
+When first cloning this repo, run `./hooks/precommit.sh` whilst in the repository's root directory to create the auto-run hook
+
+---
+
 ## License
 ```
 MIT License
