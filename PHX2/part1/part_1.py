@@ -1,6 +1,5 @@
 import pandas as pd
 from sklearn import linear_model
-from sklearn.metrics import mean_squared_error, r2_score
 
 """
 1. For last season (2024) for the entire league (all 30 teams – ie, 30 rows of
@@ -20,7 +19,6 @@ Absolute Error.
 
 # grab data
 tnames = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting", usecols="A").iloc[:,0]
-# print(tnames)
 
 WOBA = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting", usecols="N")
 X1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline", usecols = "D:N")
@@ -35,7 +33,7 @@ reg1 = linear_model.LinearRegression()
 data_set1 = X1[["ZONE%","ZONE SWING%","ZONE CONTACT%","CHASE%","CHASE CONTACT %","EDGE%", "1ST PITCH SWING%", "SWING%","WHIFF%","MEATBALL%", "MEATBALL SWING %"]]
 model1 = reg1.fit(data_set1, WOBA)
 
-print("The weights for features in model 1:",model1.coef_)
+print("Weights in model 1:\n ",model1.coef_)
 #    ZONE%	    ZONE SWING%	ZONE CONTACT% CHASE%  CHASE CONTACT %	EDGE%  1ST PITCH SWING%	SWING%	   WHIFF%	   MEATBALL%	MEATBALL SWING %
 # [[-0.02810999 -0.02807256 -0.00413438 -0.0331963  -0.00134127 -0.01468608  -0.00141497  0.06137332 -0.00731855  0.00343067  0.00115887]]
 
@@ -46,7 +44,9 @@ model1_AE = model1_predicted.sub(WOBA23).abs().set_index(tnames.values)
 model1_MAE = model1_AE.mean()
 
 print(model1_AE) #in a multiline below
-print(model1_MAE) #0.0126
+print(f"MAE: \n{model1_MAE}") #0.0126
+print(f"R^2: {model1.score(T1, WOBA23)}") # 0.08221...
+
 
 """
               WOBA
