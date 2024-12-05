@@ -1,5 +1,5 @@
 import pandas as pd
-from sklearn import linear_model
+import statsmodels.api as sm
 
 """
 1. For last season (2024) for the entire league (all 30 teams – ie, 30 rows of
@@ -21,63 +21,73 @@ Absolute Error.
 tnames = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting", usecols="A").iloc[:,0]
 
 WOBA = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting", usecols="N")
-X1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline", usecols = "D:N")
-# X2 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile", usecols = "D:Q")
+X1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline", usecols = "A,D:N").merge(right=pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile", usecols = "A,D:Q"), left_on="TEAM", right_on="TEAM")
 WOBA23 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting 2023", usecols = "N")
-T1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline 2023", usecols = "D:N")
-# T2 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile 2023", usecols = "D:Q")
+T1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline 2023", usecols = "A,D:N").merge(right=pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile 2023", usecols = "A,D:Q"), left_on="TEAM", right_on="TEAM")
 
 # Create linear regression models using scikit-learn
 
-reg1 = linear_model.LinearRegression()
-data_set1 = X1[["ZONE%","ZONE SWING%","ZONE CONTACT%","CHASE%","CHASE CONTACT %","EDGE%", "1ST PITCH SWING%", "SWING%","WHIFF%","MEATBALL%", "MEATBALL SWING %"]]
-model1 = reg1.fit(data_set1, WOBA)
+data_set1 = X1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+reg1 = sm.OLS(WOBA, data_set1)
+model1 = reg1.fit()
 
-print("Weights in model 1:\n ",model1.coef_)
-#    ZONE%	    ZONE SWING%	ZONE CONTACT% CHASE%  CHASE CONTACT %	EDGE%  1ST PITCH SWING%	SWING%	   WHIFF%	   MEATBALL%	MEATBALL SWING %
-# [[-0.02810999 -0.02807256 -0.00413438 -0.0331963  -0.00134127 -0.01468608  -0.00141497  0.06137332 -0.00731855  0.00343067  0.00115887]]
+# Used to remove columns whose p-values are over 0.05, not needed once these columns are removed
+
+print(model1.pvalues)
+print(model1.pvalues.max(numeric_only=True))
+
+# False positives when contracting columns, had to keep going
+
+# T1 = T1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "PU%", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
+# T1 = T1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "WEAK%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
+
+T1 = T1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+print("Weights in model 1:\n",model1.params) # below in multiline
+"""
+Weights in model 1:
+ZONE CONTACT%    0.002835
+SOLID%           0.003988
+BARREL%          0.006645
+dtype: float64
+"""
 
 # Part 2: Use 2023 data to predict; calc AE and MAE
-
-model1_predicted = pd.DataFrame(model1.predict(T1), columns=["WOBA"])
-model1_AE = model1_predicted.sub(WOBA23).abs().set_index(tnames.values)
+model1_AE = pd.DataFrame(model1.predict(T1), columns=["WOBA"]).sub(WOBA23).abs().set_index(tnames.values)
 model1_MAE = model1_AE.mean()
 
-print(model1_AE) #in a multiline below
-print(f"MAE: \n{model1_MAE}") #0.0126
-print(f"R^2: {model1.score(T1, WOBA23)}") # 0.08221...
-
+print(f"AE: \n{model1_AE}") #in a multiline below
+print(f"MAE: \n{model1_MAE}") #0.010638
 
 """
-              WOBA
-A's           0.018184
-Angels        0.015714
-Astros        0.006396
-Blue Jays     0.004039
-Braves        0.014319
-Brewers       0.005276
-Cardials      0.010931
-Cubs          0.017516
-Diamondbacks  0.013943
-Dodgers       0.021621
-Giants        0.008824
-Guardians     0.007251
-Mariners      0.005599
-Marlins       0.003822
-Mets          0.000909
-Nationals     0.009229
-Orioles       0.015814
-Padres        0.023651
-Phillies      0.024251
-Pirates       0.007666
-Rangers       0.011890
-Rays          0.023038
-Red Sox       0.020396
-Reds          0.010105
-Rockies       0.013847
-Royals        0.012447
-Tigers        0.018257
-Twins         0.011743
-White Sox     0.009901
-Yankees       0.013100
+                  WOBA
+A's           0.006862
+Angels        0.013688
+Astros        0.011593
+Blue Jays     0.012550
+Braves        0.020004
+Brewers       0.007996
+Cardials      0.005199
+Cubs          0.021869
+Diamondbacks  0.008997
+Dodgers       0.016260
+Giants        0.006272
+Guardians     0.008582
+Mariners      0.000141
+Marlins       0.005113
+Mets          0.000122
+Nationals     0.006092
+Orioles       0.006468
+Padres        0.006775
+Phillies      0.014121
+Pirates       0.003186
+Rangers       0.015251
+Rays          0.028919
+Red Sox       0.014712
+Reds          0.022879
+Rockies       0.010218
+Royals        0.009487
+Tigers        0.010795
+Twins         0.003296
+White Sox     0.008127
+Yankees       0.013582
 """
