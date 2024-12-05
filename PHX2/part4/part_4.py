@@ -1,5 +1,5 @@
 """
-Part IV – Data Management B
+Team: SEA
 1. For your assigned team, create a master file by joining the files for the
 provided 10 years in the ‘Data Management’ folder for your team only.
 2. Next, create:

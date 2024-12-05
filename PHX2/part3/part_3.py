@@ -1,5 +1,4 @@
 """
-Part III – Data Management A
 1.Create a master file for the AL (Lg=’AL’) and a master file for the NL
 (Lg=’NL’) by joining the files for the provided 10 years in the ‘Data
 Management’ folder.
