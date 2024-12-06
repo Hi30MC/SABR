@@ -27,7 +27,10 @@ T1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline 2023",
 
 # Create linear regression models using scikit-learn
 
+# data_set1 = X1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "PU%", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
+# data_set1 = X1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "WEAK%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
 data_set1 = X1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+
 reg1 = sm.OLS(WOBA, data_set1)
 model1 = reg1.fit()
 
@@ -40,8 +43,8 @@ print(model1.pvalues.max(numeric_only=True))
 
 # T1 = T1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "PU%", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
 # T1 = T1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "WEAK%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
-
 T1 = T1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+
 print("Weights in model 1:\n",model1.params) # below in multiline
 """
 Weights in model 1:
@@ -57,8 +60,10 @@ model1_MAE = model1_AE.mean()
 
 print(f"AE: \n{model1_AE}") #in a multiline below
 print(f"MAE: \n{model1_MAE}") #0.010638
+print(model1.summary())
 
 """
+AE:
                   WOBA
 A's           0.006862
 Angels        0.013688
