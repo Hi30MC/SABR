@@ -35,11 +35,9 @@ cum_data = pd.concat(data_list)
 AL = cum_data.loc[cum_data["Lg"] == "AL"].reset_index(drop=True)
 NL = cum_data.loc[cum_data["Lg"] == "NL"].reset_index(drop=True)
 
-# Commented to not have 4-5 second runtime whilst doing other parts
-
-# with pd.ExcelWriter("PHX2/part3/output.xlsx") as writer:
-#     AL.to_excel(writer, sheet_name="AL")
-#     NL.to_excel(writer, sheet_name="NL")
+with pd.ExcelWriter("PHX2/part3/output.xlsx") as writer:
+    AL.to_excel(writer, sheet_name="AL")
+    NL.to_excel(writer, sheet_name="NL")
     
 # Part 2: Data manip
 
@@ -59,7 +57,8 @@ WAR_Ranking = pd.DataFrame(WARs, index=[0]).transpose().set_axis(["WAR/pos"], ax
 blank_line = pd.Series([None])
 
 with pd.ExcelWriter("PHX2/part3/output2.xlsx") as writer:
-    pd.concat([top_WAR_AL_10, blank_line, top_WAR_AL_10_over_30, blank_line, top_WAR_NL_10, blank_line, top_WAR_NL_10_over_30, blank_line, WAR_Ranking]).to_excel(writer, sheet_name="Part 2", index=False)
+    pd.concat([top_WAR_AL_10, blank_line, top_WAR_AL_10_over_30, blank_line, top_WAR_NL_10, blank_line, top_WAR_NL_10_over_30]).to_excel(writer, sheet_name= "Top AL and NL Data", index=False)
+    WAR_Ranking.to_excel(writer, sheet_name="Year WAR Ranking", index=False)
 
 # Sanity Checkers:
 # print(data_2007)
