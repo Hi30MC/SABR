@@ -34,10 +34,9 @@ with pd.ExcelWriter("PHX2/part4/output.xlsx") as writer:
     
 # Part 2: Data Crunching
 
-top_WAR_decade = {int(df["Year"][5]) : df.loc[df["Tm"] == "SEA"].sort_values("WAR/pos", ascending=False).iloc[0].loc["Player"] for df in data_list}
-top_WAR_df = pd.DataFrame(top_WAR_decade, index=[0]).set_axis(axis=0, labels=["Name"]).transpose().reset_index(drop=False, names="Year")
+top_WAR_df = pd.concat([pd.DataFrame([team_data.loc[team_data["Year"] == y].sort_values("WAR/pos", ascending=False).iloc[0][["Year", "Player", "WAR/pos"]]], columns=["Year", "Player", "WAR/pos"], index=[0]) for y in range(2007, 2017)], ignore_index=True)
 
-top_OPS_10 = team_data.loc[team_data["AB"]>400].sort_values("OPS", ascending=False).iloc[:10][["ID", "Player", "Year"]].reset_index(drop=True)
+top_OPS_10 = team_data.loc[team_data["AB"]>400].sort_values("OPS", ascending=False).iloc[:10][["ID", "Player", "Year", "OPS", "AB"]].reset_index(drop=True)
 
 with pd.ExcelWriter("PHX2/part4/output2.xlsx") as writer:
     top_WAR_df.to_excel(writer, sheet_name="Top WAR", index=False)

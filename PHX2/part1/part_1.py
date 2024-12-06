@@ -7,7 +7,6 @@ data), using team-level data from StatCast from Baseball Savant create a
 model estimating the variable wOBA (in the ‘Statcast Hitting’ table) using the
 variables in the ‘Plate Discipline’ and ‘Batted Ball Profile’ tables. 
 
-
 2. Next, apply your model to the 2023 season (change year in upper right
 dropdown) to estimate wOBA. Calculate the absolute value of the difference
 between the actual values in 2021 and your estimated values for each team.

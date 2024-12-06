@@ -36,8 +36,8 @@ AL = cum_data.loc[cum_data["Lg"] == "AL"].reset_index(drop=True)
 NL = cum_data.loc[cum_data["Lg"] == "NL"].reset_index(drop=True)
 
 with pd.ExcelWriter("PHX2/part3/output.xlsx") as writer:
-    AL.to_excel(writer, sheet_name="AL")
-    NL.to_excel(writer, sheet_name="NL")
+    AL.to_excel(writer, sheet_name="AL", float_format="%.2f")
+    NL.to_excel(writer, sheet_name="NL", float_format="%.2f")
     
 # Part 2: Data manip
 
@@ -45,11 +45,11 @@ with pd.ExcelWriter("PHX2/part3/output.xlsx") as writer:
 top_WAR_AL = AL.sort_values(by="WAR/pos", inplace=False, ascending=False)
 top_WAR_NL = NL.sort_values(by="WAR/pos", inplace=False, ascending=False)
 
-top_WAR_AL_10 = top_WAR_AL.iloc[:10,:].reset_index()
-top_WAR_NL_10 = top_WAR_NL.iloc[:10,:].reset_index()
+top_WAR_AL_10 = top_WAR_AL.iloc[:10,:].reset_index(drop=True)[["ID", "Player", "WAR/pos", "Year", "Lg", "Age"]]
+top_WAR_NL_10 = top_WAR_NL.iloc[:10,:].reset_index(drop=True)[["ID", "Player", "WAR/pos", "Year", "Lg", "Age"]]
 
-top_WAR_AL_10_over_30 = top_WAR_AL.loc[top_WAR_AL["Age"]>30].iloc[:10,:].reset_index()
-top_WAR_NL_10_over_30 = top_WAR_NL.loc[top_WAR_NL["Age"]>30].iloc[:10,:].reset_index()
+top_WAR_AL_10_over_30 = top_WAR_AL.loc[top_WAR_AL["Age"]>30].iloc[:10,:].reset_index(drop=True)[["ID", "Player", "WAR/pos", "Year", "Lg", "Age"]]
+top_WAR_NL_10_over_30 = top_WAR_NL.loc[top_WAR_NL["Age"]>30].iloc[:10,:].reset_index(drop=True)[["ID", "Player", "WAR/pos", "Year", "Lg", "Age"]]
 
 WARs = {int(df["Year"][5]) : float(df["WAR/pos"].sum().round(4)) for df in data_list}
 WAR_Ranking = pd.DataFrame(WARs, index=[0]).transpose().set_axis(["WAR/pos"], axis=1).sort_values(by="WAR/pos", ascending=False).reset_index(drop=False, names="Year")
