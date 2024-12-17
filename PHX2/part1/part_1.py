@@ -20,15 +20,16 @@ Absolute Error.
 tnames = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting", usecols="A").iloc[:,0]
 
 WOBA = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting", usecols="N")
-X1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline", usecols = "A,D:N").merge(right=pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile", usecols = "A,D:Q"), left_on="TEAM", right_on="TEAM")
+X1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline", usecols = "A,C:N").merge(right=pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile", usecols = "A,C:Q"), left_on="TEAM", right_on="TEAM")
 WOBA23 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Statcast Hitting 2023", usecols = "N")
-T1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline 2023", usecols = "A,D:N").merge(right=pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile 2023", usecols = "A,D:Q"), left_on="TEAM", right_on="TEAM")
+T1 = pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Plate Discipline 2023", usecols = "A,C:N").merge(right=pd.read_excel("PHX2/part1/PHX2.xlsx", sheet_name = "Batted Ball Profile 2023", usecols = "A,C:Q"), left_on="TEAM", right_on="TEAM")
 
 # Create linear regression models using scikit-learn
 
 # data_set1 = X1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "PU%", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
 # data_set1 = X1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "WEAK%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
-data_set1 = X1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+# data_set1 = X1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+data_set1 = X1[["PITCHES", "EDGE%", "BBE", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
 
 reg1 = sm.OLS(WOBA, data_set1)
 model1 = reg1.fit()
@@ -42,7 +43,8 @@ print(model1.pvalues.max(numeric_only=True))
 
 # T1 = T1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "PU%", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
 # T1 = T1[["ZONE CONTACT%", "GB%" , "FB%", "LD%", "WEAK%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
-T1 = T1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+# T1 = T1[["ZONE CONTACT%", "SOLID%", "BARREL%"]]
+T1 = T1[["PITCHES", "EDGE%", "BBE", "WEAK%", "TOPPED%", "UNDER%", "FLARE/BURNER%", "SOLID%", "BARREL%"]]
 
 print("Weights in model 1:\n",model1.params) # below in multiline
 """
@@ -58,40 +60,40 @@ model1_AE = pd.DataFrame(model1.predict(T1), columns=["WOBA"]).sub(WOBA23).abs()
 model1_MAE = model1_AE.mean()
 
 print(f"AE: \n{model1_AE}") #in a multiline below
-print(f"MAE: \n{model1_MAE}") #0.010638
-print(model1.summary())
+print(f"MAE: \n{model1_MAE}") #0.007604
+print(model1.summary()) 
 
 """
 AE:
                   WOBA
-A's           0.006862
-Angels        0.013688
-Astros        0.011593
-Blue Jays     0.012550
-Braves        0.020004
-Brewers       0.007996
-Cardials      0.005199
-Cubs          0.021869
-Diamondbacks  0.008997
-Dodgers       0.016260
-Giants        0.006272
-Guardians     0.008582
-Mariners      0.000141
-Marlins       0.005113
-Mets          0.000122
-Nationals     0.006092
-Orioles       0.006468
-Padres        0.006775
-Phillies      0.014121
-Pirates       0.003186
-Rangers       0.015251
-Rays          0.028919
-Red Sox       0.014712
-Reds          0.022879
-Rockies       0.010218
-Royals        0.009487
-Tigers        0.010795
-Twins         0.003296
-White Sox     0.008127
-Yankees       0.013582
+A's           0.002424
+Angels        0.016000
+Astros        0.000882
+Blue Jays     0.002872
+Braves        0.013833
+Brewers       0.009844
+Cardials      0.000012
+Cubs          0.011011
+Diamondbacks  0.017617
+Dodgers       0.007311
+Giants        0.012669
+Guardians     0.003015
+Mariners      0.000075
+Marlins       0.002764
+Mets          0.003797
+Nationals     0.001628
+Orioles       0.011734
+Padres        0.006245
+Phillies      0.017202
+Pirates       0.004526
+Rangers       0.015215
+Rays          0.024240
+Red Sox       0.012333
+Reds          0.010394
+Rockies       0.003011
+Royals        0.005840
+Tigers        0.005199
+Twins         0.000453
+White Sox     0.004571
+Yankees       0.001398
 """
