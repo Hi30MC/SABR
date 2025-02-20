@@ -1,3 +1,4 @@
 .pytest_cache
 __pycache__
 SABRs/test.py
+SABRs/test.tex
