@@ -1,0 +1,126 @@
+Major League Baseball has a problem. MLB entertains millions of fans, including a growing number
+outside the US. The magical entertainment value of baseball, which has excited fans for more than a
+century still exists. For validation, just look at highlights of the more than 2400 games that are played
+during a six-month regular season and witness the diving catches, tape-measure home runs, a bases-
+loaded strikeout to squelch a rally, which are just a few examples of while millions love the game.
+While baseball often delight fans, it has a problem of “efficiency.” It delivers too few of those high-
+impact moments over the course of a nearly three-hour game. MLB has become an inefficient means
+of entertainment. Comparing the 2021 season to thirty years ago, the length of a nine-inning game is
+14% longer. At the same time, the number of batted balls per game—a reasonable gauge of “action”
+in a game—is down more than 17% vs. 1991. No doubt there are some “action moments” that entertain
+that are not captured in batted balls, such as a clutch strikeout, but the highest level of action occurs
+when more players are involved in a play.
+
+There are many levers that go into the entertainment efficiency equation, such as the strikeout
+rate, which has risen dramatically over the last few decades, which often consumes more pitches
+and lacks the action value of batted balls. The rise in pitches per plate appearance, the growing
+dead space between pitches, the increased number of pitching changes, the commercial time
+between innings, and even the increased number of foul balls, which can extend plate
+appearances, all contribute to either (or both) the decline of action or the length of games.
+There’s another layer of events prevalent in today’s game, which may impact baseball’s
+entertainment inefficiency, such as the increasing velocity of fastballs or a focus on optimizing
+spin rate and spin axis so that pitchers can maximize pitch movement and deception. While the
+recent wave of technology has helped both pitchers, hitters, and fielders, arguably it has
+benefited pitchers more, since they control the start of every potential play with their pitch
+selection and execution. We’ve witnessed the hitters’ response to increased velocity and a lively
+baseball—increase launch angle so that when you do connect, it’s more likely to result in a home
+run. However, this “all or nothing” approach at the plate can lead to more strikeouts and
+ultimately less action.
+
+Improving baseball’s entertainment efficiency isn’t as simple as picking one lever and
+manipulating it. There are interactions between many of the “policy” variables. For example,
+moving the pitching mound back to increase the distance to home plate should lower pitch
+velocity, but it also may encourage pitchers to throw more breaking pitches, which may have a
+potentially offsetting (or compounding) impact on hitters. Deadening the baseball, so that it
+travels less far, may encourage hitters to focus less on elevating their launch angle in search of a
+more elusive home run. There is even some evidence that restricting defensive shifting will alter
+the pitches a pitcher chooses to throw. In baseball, very few things happen in isolation.
+Your goal in this case project is to develop a set of recommendations that will increase the
+efficiency of action in MLB games and hence, make the game more relatable to the next
+generation of fans. For the purpose of this case, we’ll define “efficiency of action” as the number
+of balls in play per unit of time. We’ll also add a component for the overall length of game (i.e.,
+shorter is better than longer). The action index is as follows:
+Action Index = Batted Balls per MLB game (less a penalty for increasing the length of an MLB
+game beyond the 2021 average of 190 minutes)
+
+The Action Index formula is as follows:
+Plate appearances (PA) ̶ Walks (BB) ̶ Hit-by-pitch (HBP) ̶ Less Strikeouts (K) = Batted Balls
+Batted Balls ÷ # of Games = Batted Balls per Game
+Action index for 2021 = 50.1
+Average minutes per game for 2021 = 191
+Action Index penalty for increasing game length = .25 per minute above 190. This discourages
+you from increasing batted balls per game by simply making games longer.
+
+Your case problem is to analyze any of the variables that impact the number of batted balls and
+recommend a set of rule or policy changes that will increase the efficiency of action during a
+ballgame. This may mean proposing changes that will reduce strikeouts, reduce walks, or reduce
+pitches per plate appearance (which could shorten games). Should you tinker with the strike zone
+definition, or move the pitching mound back (i.e., further away from home plate) to make pitches
+more “hittable”? However, will that change create more walks, as pitchers are further from home
+plate and possibly less likely to throw pitches in the strike zone? Should you consider restricting
+defensive positioning, as shifts have had an impact on turning more batted balls into outs? Your
+recommendations must be supported by quantitative analysis and data. You are encouraged to
+explore a variety of options for consideration. In doing so, you will showcase your understanding
+of the complexity and the interconnectedness of what happens on a baseball diamond.
+Ultimately, you should estimate/forecast the action index that is expected to result from your
+recommendations.
+
+While you are encouraged to think creatively about this problem and your solutions, be mindful
+making your new version of baseball recognizable to current and longtime baseball fans. While
+we want to make the game more appealing to young fans and new fans, we do not want to
+alienate longtime fans. These veteran fans have shown their resilience to stay connected to the
+game they love even when home runs soared in the late 1990s, but everyone has their boundaries
+of how much change they will tolerate.
+The Case Problem
+
+To reiterate, your case assignment is to develop a set of policies and/or rule modifications that
+will increase the number of batted balls per game and therefore, increase the “action index”.
+Your recommended policies and rule modifications will be supported by data and analysis.
+Your output for this case assignment should be in the form of a powerpoint presentation to
+support a 20-minute oral presentation to a panel of judges, followed by a 10-minute Q & A by
+the judges. The judge's criteria will focus on the quality of your decision process and your
+analytical framework more than any single "right" answer. The ideal set of recommendations has
+a logical flow, and is inclusive of the key factors that are expected to have a true impact on any
+decision that results from your analysis. More specifically, there are several key areas that will
+be a focus for the judges:
+
+
+The presentation should include:
+• Your process—the framing of the problem (i.e, a clear definition of what issue/problem
+the new stat is addressing), as well as the methodology used in developing your analysis
+and recommendations, including:
+    o The way in which you structure your analysis—is it consistent with the problem
+      you pose and is it laid out logically?
+    o The criteria you used to evaluate the data and draw conclusions
+    o The statistical tools and techniques you employed to analyze your strategic
+      recommendations
+    o Your assessment of the risks associated with your strategy recommendations
+• Your conclusions and recommendations—Does your analysis support your
+  recommendations? You should also include the limitations of your analysis and the risk
+  factors associated with your recommendations, as well as obstacles to implementation. You
+  should also provide a perspective on the potential impact of your recommendations, via its
+  impact on the “action index”.
+• Your creativity—while you will not have time to go into detail on all of your analysis, did
+  you think "outside the box" and address the problem you posed in a creative way and/or
+  did you present your findings in a creative, effective way.
+• The quality and clarity of your presentation—it's critical to carefully and strategically
+  choose what to present and share with the judges. Storytelling is a critical aspect of
+  influencing decisions through analytics.
+  A final comment regarding "rules" of the case and the competition:
+• The intent of the competition is that team members are competing against other team
+  members. This means that assistance from professors or non-members of the team is not
+  permitted. Also, do not contact any MLB team or league personnel, or any other experts
+  on non-experts, for advice on any of the case issues.
+• You are encouraged to use the internet to help you with the case, particularly as a source
+  of data, but be prepared to add your own insights, including quantitative analysis to the
+  material you choose to draw from on the internet. One of the most common pitfalls for
+  Case Competition participants is the over-reliance on analysis published on the leading
+  analytical websites. While it is often valuable to consider these analyses, student teams
+  have lost points by relying solely on these sites for answers to key case questions. We are
+  looking to understand your analyses of the case questions, without an over-reliance on
+  other peoples' thinking.
+• Let me mention what we are not looking for in this case: We are not interested in
+  marketing tactics, media campaigns, or any other levers that marketers use to connect their
+  product with fans/consumers. This case is singularly about fixing the product on the field
+  of play, to make the game more appealing to fans of all ages.
+See Appendix 
